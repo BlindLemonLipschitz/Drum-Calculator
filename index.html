@@ -7,6 +7,9 @@ span {
   color: blue;
   font-weight: bold;
 }
+p {
+  font-weight: bold;
+}
 .slidecontainer {
   width: 100%;
   
@@ -54,6 +57,16 @@ span {
     drumsNeeded:"empty",
     currentNumber:"empty",
     timeInMinutes:"empty",
+    timeInHours: function() {
+    var val = this.timeInMinutes / 60
+    if (val >= 1) {
+    return Math.round(val)
+    }
+    return 0
+    },
+    timeRemainder: function() {
+    return this.timeInMinutes % 60
+    },
     runFinished: function() {
     var mins = this.timeInMinutes * (this.drumsNeeded - this.currentNumber);
     var time = moment().add(mins, "minutes");
@@ -86,7 +99,7 @@ drum.hoursFromNow = window.prompt("Look ahead: enter number of hours")
   <input type="range" min="1" max="300" value="50" class="slider" id="myRange">
 </div>
 
-<p>How many minutes per drum? <span id="minutesPerDrum"></span></p>
+<p>How many minutes per drum? <span id="minutesPerDrum"></span></p> <div id="hoursPerDrum">  hrs  mins</div>
 
 <div class="slidecontainer">
   <input type="range" min="1" max="400" value="50" class="slider" id="minRange">
@@ -119,10 +132,14 @@ slider.oninput = function() {
 
 var slider1 = document.getElementById("minRange");
 var output1 = document.getElementById("minutesPerDrum");
+var outputHours = document.getElementById("hoursPerDrum");
+
 output1.innerHTML = slider1.value;
 slider1.oninput = function() {
   output1.innerHTML = this.value;
   drum.timeInMinutes = this.value;
+  outputHours.innerHTML = "          " + drum.timeInHours() + " hrs " + drum.timeRemainder() + " mins"
+  
   message.innerHTML = "Finished around " + drum.runFinished()
 
 }
