@@ -1,5 +1,48 @@
 <html>
     <head>
+	<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+span {
+  color: blue;
+  font-weight: bold;
+}
+.slidecontainer {
+  width: 100%;
+  
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+</style>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
 <script>
     moment().format();
@@ -22,20 +65,87 @@
     //console.log("next", next)
     var time = moment().add(this.hoursFromNow, "hours");
     var formatedTime = moment(time).format('LLL')
-    return "We should be on drum " + Math.round(next) + "\n" + formatedTime
+    return "We should be on drum " + "<span style=\"color:blue;font-size:35px;\"/>" + Math.round(next) + "</span>" + " around " + formatedTime
     }
 }
-
+/*
 drum.currentNumber = window.prompt("Current Drum Number")
 drum.timeInMinutes = window.prompt("How many minutes per drum?")
 drum.drumsNeeded = window.prompt("How many drums for this run?")
 drum.hoursFromNow = window.prompt("Look ahead: enter number of hours")
-
+*/
 //console.log("future:",drum.futureDrumNumber,"dumsNeedes:", drum.drumsNeeded,"hoursFromNow:", drum.hoursFromNow,"currentDrumNumber:", drum.currentNumber)
-window.alert("Finished around " + drum.runFinished() + "\n" + drum.futureNumber()) 
+//window.alert("Finished around " + drum.runFinished() + "\n" + drum.futureNumber()) 
 </script>
 
     </head>
     <body>
-	<h1>THIS IS A TEST</h1>    </body>
+<p>Current Drum Number <span id="drumNumber"></span></p>
+
+<div class="slidecontainer">
+  <input type="range" min="1" max="300" value="50" class="slider" id="myRange">
+</div>
+
+<p>How many minutes per drum? <span id="minutesPerDrum"></span></p>
+
+<div class="slidecontainer">
+  <input type="range" min="1" max="400" value="50" class="slider" id="minRange">
+</div>
+
+<p>How many drums for this run? <span id="howManyDrums"></span></p>
+
+<div class="slidecontainer">
+  <input type="range" min="1" max="300" value="50" class="slider" id="manyRange">
+</div>
+
+<p>Look ahead: enter number of hours <span id="lookAhead"></span></p>
+
+<div class="slidecontainer">
+  <input type="range" min="1" max="150" value="50" class="slider" id="lookRange">
+</div>
+<h1 id=message></h1>
+<h1 id=messageFuture></h1>
+
+<script>
+var slider = document.getElementById("myRange");
+var output = document.getElementById("drumNumber");
+output.innerHTML = slider.value;
+slider.oninput = function() {
+  output.innerHTML = this.value;
+  drum.currentNumber = this.value;
+  message.innerHTML = "Finished around " + drum.runFinished()
+
+}
+
+var slider1 = document.getElementById("minRange");
+var output1 = document.getElementById("minutesPerDrum");
+output1.innerHTML = slider1.value;
+slider1.oninput = function() {
+  output1.innerHTML = this.value;
+  drum.timeInMinutes = this.value;
+  message.innerHTML = "Finished around " + drum.runFinished()
+
+}
+
+var slider2 = document.getElementById("manyRange");
+var output2 = document.getElementById("howManyDrums");
+output2.innerHTML = slider2.value;
+slider2.oninput = function() {
+  output2.innerHTML = this.value;
+  drum.drumsNeeded = this.value;
+  message.innerHTML = "Finished around " + drum.runFinished()
+
+}
+
+var slider3 = document.getElementById("lookRange");
+var output3 = document.getElementById("lookAhead");
+output3.innerHTML = slider.value;
+slider3.oninput = function() {
+  output3.innerHTML = this.value;
+  drum.hoursFromNow = this.value;
+  messageFuture.innerHTML = drum.futureNumber() 
+}
+//window.alert("Finished around " + drum.runFinished() + "\n" + drum.futureNumber())
+</script>
+    </body>
 </html>
