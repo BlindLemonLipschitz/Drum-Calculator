@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
+<script>
+    moment().format();
+</script>
+	
+        <script src="index.pack.js"></script>
+	<script> var drum = {
+    hoursFromNow:"empty",
+    drumsNeeded:"empty",
+    currentNumber:"empty",
+    timeInMinutes:"empty",
+    runFinished: function() {
+    var mins = this.timeInMinutes * (this.drumsNeeded - this.currentNumber);
+    var time = moment().add(mins, "minutes");
+    return moment(time).format('LLL')
+    },    
+    futureNumber: function() {
+    var additionalDrums = (this.hoursFromNow * 60 / this.timeInMinutes);
+    var next = Number(drum.currentNumber) + Number(additionalDrums)
+    //console.log("next", next)
+    var time = moment().add(this.hoursFromNow, "hours");
+    var formatedTime = moment(time).format('LLL')
+    return "We should be on drum " + Math.round(next) + "\n" + formatedTime
+    }
+}
+
+drum.currentNumber = window.prompt("Current Drum Number")
+drum.timeInMinutes = window.prompt("How many minutes per drum?")
+drum.drumsNeeded = window.prompt("How many drums for this run?")
+drum.hoursFromNow = window.prompt("Look ahead: enter number of hours")
+
+//console.log("future:",drum.futureDrumNumber,"dumsNeedes:", drum.drumsNeeded,"hoursFromNow:", drum.hoursFromNow,"currentDrumNumber:", drum.currentNumber)
+window.alert("Finished around " + drum.runFinished() + "\n" + drum.futureNumber()) 
+</script>
+
+    </head>
+    <body>
+	<h1>THIS IS A TEST</h1>    </body>
+</html>
