@@ -78,7 +78,7 @@ p {
     //console.log("next", next)
     var time = moment().add(this.hoursFromNow, "hours");
     var formatedTime = moment(time).format('LLL')
-    return "We should be on drum " + "<span style=\"color:blue;font-size:35px;\"/>" + Math.round(next) + "</span>" + " around " + formatedTime
+    return "We should be on drum " + "<span style=\"color:blue;font-size:35px;\"/>" + Math.floor(next) + "</span>" + " around " + formatedTime
     }
 }
 /*
