@@ -60,7 +60,7 @@ p {
     timeInHours: function() {
     var val = this.timeInMinutes / 60
     if (val >= 1) {
-    return Math.round(val)
+    return Math.floor(val)
     }
     return 0
     },
