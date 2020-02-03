@@ -1,168 +1,46 @@
-<html>
-    <head>
-	<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-span {
-  color: blue;
-  font-weight: bold;
-}
-p {
-  font-weight: bold;
-}
-.slidecontainer {
-  width: 100%;
-  
-}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
+  <script>moment().format();</script>
+  <script src="index.pack.js"></script
+  <meta charset="UTF-8">
+  <title>Drum Calc</title>
 
-.slider {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 25px;
-  background: #d3d3d3;
-  outline: none;
-  opacity: 0.7;
-  -webkit-transition: .2s;
-  transition: opacity .2s;
-}
 
-.slider:hover {
-  opacity: 1;
-}
+</head>
+<body>
+<link rel="stylesheet" type="text/css" href="style.css">
+<form>
+  <h1>Drum Calculator</h1>
+  <div class="question">
+    <input type="number" onfocus="updateActiveBox(this)" class="field"  id="currentNumber" value=""/>
+    <label>Current Drum</label>
+  </div>
+  <div class="question">
+    <input type="number" onfocus="updateActiveBox(this)" class="field"  id="timeInMinutes" value=""/>
+    <label>Minutes Per Drum</label>
+  </div>
+  <div class="question">
+    <input type="number" onfocus="updateActiveBox(this)" class="field"  id="drumsNeeded" value=""/>
+    <label>Drums In Run</label>
+  </div>
+  <div class="question">
+    <input type="number" onfocus="updateActiveBox(this)" class="field"  id="hoursFromNow" value=""/>
+    <label>Hours From Now</label>
+  </div>
+  </form>
 
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 25px;
-  height: 25px;
-  background: #4CAF50;
-  cursor: pointer;
-}
+  <div class="pann">
+  <h2 class="message" id="message">Finished around February 3, 2020 6:08 AM</h2>
+  <h2 class="message" id="messageFuture">We should be on drum 105 around February 3, 2020 7:52 AM</h2>
+  <span class="butts"><button onclick="selectTextDown()">" Up "</button> <button onclick="selectText()">Down</button></span>
 
-.slider::-moz-range-thumb {
-  width: 25px;
-  height: 25px;
-  background: #4CAF50;
-  cursor: pointer;
-}
-</style>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
-<script>
-    moment().format();
-</script>
-	
-        <script src="index.pack.js"></script>
-	<script> var drum = {
-    hoursFromNow:"empty",
-    drumsNeeded:"empty",
-    currentNumber:"empty",
-    timeInMinutes:"empty",
-    timeInHours: function() {
-    var val = this.timeInMinutes / 60
-    if (val >= 1) {
-    return Math.floor(val)
-    }
-    return 0
-    },
-    timeRemainder: function() {
-    return this.timeInMinutes % 60
-    },
-    runFinished: function() {
-    var mins = this.timeInMinutes * (this.drumsNeeded - this.currentNumber);
-    var time = moment().add(mins, "minutes");
-    return moment(time).format('LLL')
-    },    
-    futureNumber: function() {
-    var additionalDrums = (this.hoursFromNow * 60 / this.timeInMinutes);
-    var next = Number(drum.currentNumber) + Number(additionalDrums)
-    //console.log("next", next)
-    var time = moment().add(this.hoursFromNow, "hours");
-    var formatedTime = moment(time).format('LLL')
-    return "We should be on drum " + "<span style=\"color:blue;font-size:35px;\"/>" + Math.floor(next) + "</span>" + " around " + formatedTime
-    }
-}
-/*
-drum.currentNumber = window.prompt("Current Drum Number")
-drum.timeInMinutes = window.prompt("How many minutes per drum?")
-drum.drumsNeeded = window.prompt("How many drums for this run?")
-drum.hoursFromNow = window.prompt("Look ahead: enter number of hours")
-*/
-//console.log("future:",drum.futureDrumNumber,"dumsNeedes:", drum.drumsNeeded,"hoursFromNow:", drum.hoursFromNow,"currentDrumNumber:", drum.currentNumber)
-//window.alert("Finished around " + drum.runFinished() + "\n" + drum.futureNumber()) 
-</script>
+  <p><input type="range" min="1" max="100" value="" class="slider" id="myRange"</p>
 
-    </head>
-    <body>
-<p>Current Drum Number <span id="drumNumber"></span></p>
+  </div>
 
-<div class="slidecontainer">
-  <input type="range" min="1" max="300" value="50" class="slider" id="myRange">
-</div>
-
-<p>How many minutes per drum? <span id="minutesPerDrum"></span></p> <div id="hoursPerDrum">  hrs  mins</div>
-
-<div class="slidecontainer">
-  <input type="range" min="1" max="400" value="50" class="slider" id="minRange">
-</div>
-
-<p>How many drums for this run? <span id="howManyDrums"></span></p>
-
-<div class="slidecontainer">
-  <input type="range" min="1" max="300" value="50" class="slider" id="manyRange">
-</div>
-
-<p>Look ahead: enter number of hours <span id="lookAhead"></span></p>
-
-<div class="slidecontainer">
-  <input type="range" min="1" max="150" value="50" class="slider" id="lookRange">
-</div>
-<h1 id=message></h1>
-<h1 id=messageFuture></h1>
-
-<script>
-var slider = document.getElementById("myRange");
-var output = document.getElementById("drumNumber");
-output.innerHTML = slider.value;
-slider.oninput = function() {
-  output.innerHTML = this.value;
-  drum.currentNumber = this.value;
-  message.innerHTML = "Finished around " + drum.runFinished()
-
-}
-
-var slider1 = document.getElementById("minRange");
-var output1 = document.getElementById("minutesPerDrum");
-var outputHours = document.getElementById("hoursPerDrum");
-
-output1.innerHTML = slider1.value;
-slider1.oninput = function() {
-  output1.innerHTML = this.value;
-  drum.timeInMinutes = this.value;
-  outputHours.innerHTML = "          " + drum.timeInHours() + " hrs " + drum.timeRemainder() + " mins"
-  
-  message.innerHTML = "Finished around " + drum.runFinished()
-
-}
-
-var slider2 = document.getElementById("manyRange");
-var output2 = document.getElementById("howManyDrums");
-output2.innerHTML = slider2.value;
-slider2.oninput = function() {
-  output2.innerHTML = this.value;
-  drum.drumsNeeded = this.value;
-  message.innerHTML = "Finished around " + drum.runFinished()
-
-}
-
-var slider3 = document.getElementById("lookRange");
-var output3 = document.getElementById("lookAhead");
-output3.innerHTML = slider.value;
-slider3.oninput = function() {
-  output3.innerHTML = this.value;
-  drum.hoursFromNow = this.value;
-  messageFuture.innerHTML = drum.futureNumber() 
-}
-//window.alert("Finished around " + drum.runFinished() + "\n" + drum.futureNumber())
-</script>
-    </body>
+<script  src="./script.js"></script>
+</<body>
 </html>
