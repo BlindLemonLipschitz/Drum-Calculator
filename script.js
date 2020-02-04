@@ -90,9 +90,23 @@ function selectText() {
     }
 function updateActiveBox(x) {
   activeBox = x.id;
+  document.getElementById("myRange").value = x.value;
   //x.style.fontSize = "xx-large";
   //document.getElementById(activeBox).value = this.value;
   //drum[activeBox] = this.value;
   //document.getElementById("message").innerHTML = "Finished around " + drum.runFinished();
   //document.getElementById("messageFuture").innerHTML = drum.futureNumber();
+}
+var boxBox = function(x) {
+  document.getElementById(activeBox).value = x.value;
+  drum[activeBox] = x.value;
+  // document.getElementById("message").style.visibility = "visible";
+  //document.getElementsByTagName("h2").style.color = "red";
+  document.getElementById("message").innerHTML = "Finished around " + drum.runFinished();
+  document.getElementById("messageFuture").innerHTML = drum.futureNumber();
+  //message.innerHTML = drum.runFinished();
+}
+function unHideMessage(x) {
+  document.getElementById("message").style.visibility = "visible";
+  document.getElementById("messageFuture").style.visibility = "visible";
 }

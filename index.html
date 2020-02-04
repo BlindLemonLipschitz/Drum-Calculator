@@ -15,31 +15,28 @@
 <form>
   <h1>Drum Calculator</h1>
   <div class="question">
-    <input type="number" onfocus="updateActiveBox(this)" class="field"  id="currentNumber" value=""/>
+    <input type="number" oninput="updateActiveBox(this)" onfocus="updateActiveBox(this)" class="field"  id="currentNumber" placeholder="Current Drum" value="" onchange="boxBox(this)"/>
     <label>Current Drum</label>
   </div>
   <div class="question">
-    <input type="number" onfocus="updateActiveBox(this)" class="field"  id="timeInMinutes" value=""/>
+    <input type="number" oninput="updateActiveBox(this)" onfocus="updateActiveBox(this)" class="field"  id="timeInMinutes" placeholder="Minutes Per Drum" value="" onchange="boxBox(this)"/>
     <label>Minutes Per Drum</label>
   </div>
   <div class="question">
-    <input type="number" onfocus="updateActiveBox(this)" class="field"  id="drumsNeeded" value=""/>
+    <input type="number" oninput="updateActiveBox(this)" onfocus="updateActiveBox(this);unHideMessage(this)" class="field"  id="drumsNeeded" placeholder="Drums In Run"   value="" onchange="boxBox(this)"/>
     <label>Drums In Run</label>
   </div>
   <div class="question">
-    <input type="number" onfocus="updateActiveBox(this)" class="field"  id="hoursFromNow" value=""/>
+    <input type="number" oninput="updateActiveBox(this)" onfocus="updateActiveBox(this)" class="field"  id="hoursFromNow" placeholder="Hours From Now" value="" onchange="boxBox(this)"/>
     <label>Hours From Now</label>
   </div>
   </form>
 
   <div class="pann">
+  <p><input type="range" min="1" max="100" value="" class="slider" id="myRange"</p>
   <h2 class="message" id="message">Finished around February 3, 2020 6:08 AM</h2>
   <h2 class="message" id="messageFuture">We should be on drum 105 around February 3, 2020 7:52 AM</h2>
-  <span class="butts"><button onclick="selectTextDown()">" Up "</button> <button onclick="selectText()">Down</button></span>
-
-  <p><input type="range" min="1" max="100" value="" class="slider" id="myRange"</p>
-
-  </div>
+  <span class="butts"><button onclick="selectTextDown()">" Up "</button> <button onclick="selectText()">Down</button></span></div>
 
 <script  src="./script.js"></script>
 </<body>

@@ -200,5 +200,12 @@ form .question input[type="number"]:valid ~ label {
 
 }
 h2 {
- //color: white;  
+  visibility: hidden;
+ //color: white;
+}
+::placeholder {
+  css declarations;
+  color: black;
+  padding: 8px 8px;
+
 }
