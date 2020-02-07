@@ -1,12 +1,8 @@
-//src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js";
-//moment().format();
 var activeBox = "currentNumber";
 var selectedBox = 1;
 var inputArray = ["currentNumber","timeInMinutes","drumsNeeded","hoursFromNow"];
 var inputCount = document.getElementsByClassName("field").length;
 var slider = document.getElementById("myRange");
-//var output = document.getElementById(activeBox);
-//output.value = slider.value
 
 var drum = {
   currentNumber:1,
@@ -31,7 +27,6 @@ var drum = {
   futureNumber: function() {
   var additionalDrums = (this.hoursFromNow * 60 / this.timeInMinutes);
   var next = Number(drum.currentNumber) + Number(additionalDrums)
-  //console.log("next", next)
   var time = moment().add(this.hoursFromNow, "hours");
   var formatedTime = moment(time).format('LLL')
   return "We should be on drum " + "<span style=\"color:blue;font-size:35px;\"/>" + Math.round(next) + "</span>" + " around " + formatedTime
@@ -41,17 +36,11 @@ var drum = {
 slider.oninput = function() {
   document.getElementById(activeBox).value = this.value;
   drum[activeBox] = this.value;
-  //document.getElementById("demo").innerHTML = this.value;
-  //document.getElementById("demo").innerHTML = drum.currentNumber;
-  //document.getElementsByTagName("h2").style.color = "red";
   document.getElementById("message").innerHTML = "Finished around " + drum.runFinished();
   document.getElementById("messageFuture").innerHTML = drum.futureNumber();
-  //message.innerHTML = drum.runFinished();
 }
 slider.onchange = function() {
-  //document.getElementById(activeBox+"i").style.background = "white";
   document.getElementById(activeBox).select();
-  //document.getElementById("message").innerHTML = "Finished around " + drum.runFinished();
 }
 
 function selectTextDown() {
@@ -65,10 +54,6 @@ function selectTextDown() {
   const input = document.getElementById(inputArray[selectedBox]);
   input.focus();
   input.select();
-  //document.getElementById(activeBox).value = this.value;
-  //drum[activeBox] = this.value;
-  //document.getElementById("message").innerHTML = "Finished around " + drum.runFinished();
-  //document.getElementById("messageFuture").innerHTML = drum.futureNumber();
 }
 function selectText() {
   var selectedBox = inputArray.indexOf(activeBox);
@@ -80,31 +65,16 @@ function selectText() {
   const input = document.getElementById(inputArray[selectedBox]);
   input.focus();
   input.select();
-  //document.getElementById("demo").innerHTML = drum.currentNumber;
-  //document.getElementById(activeBox).value = this.value;
-  //drum[activeBox] = this.value;
-  //document.getElementById("message").innerHTML = "Finished around " + drum.runFinished();
-  //document.getElementById("messageFuture").innerHTML = drum.futureNumber();
-
-
     }
 function updateActiveBox(x) {
   activeBox = x.id;
   document.getElementById("myRange").value = x.value;
-  //x.style.fontSize = "xx-large";
-  //document.getElementById(activeBox).value = this.value;
-  //drum[activeBox] = this.value;
-  //document.getElementById("message").innerHTML = "Finished around " + drum.runFinished();
-  //document.getElementById("messageFuture").innerHTML = drum.futureNumber();
 }
 var boxBox = function(x) {
   document.getElementById(activeBox).value = x.value;
   drum[activeBox] = x.value;
-  // document.getElementById("message").style.visibility = "visible";
-  //document.getElementsByTagName("h2").style.color = "red";
   document.getElementById("message").innerHTML = "Finished around " + drum.runFinished();
   document.getElementById("messageFuture").innerHTML = drum.futureNumber();
-  //message.innerHTML = drum.runFinished();
 }
 function unHideMessage(x) {
   document.getElementById("message").style.visibility = "visible";
